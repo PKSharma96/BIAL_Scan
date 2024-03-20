@@ -43,7 +43,9 @@ export const Login = () => {
 
         <section className="section-login">
           <div className="container grid grid-center">
-            <h2 className="login-heading">Passenger Reconciliation System</h2>
+            <div className="logo-container">
+              <img src="/photos/main_logo.png" alt="Logo" />
+            </div>
             <div className="login-form">
               <h2>Login</h2>
               <form onSubmit={handleLogin}>
@@ -57,7 +59,7 @@ export const Login = () => {
                 </div>
                 <div className="input-group">
                   <span><FaMapMarkerAlt /></span>
-                  <input type="text" placeholder="Location" value={currentLocation} />
+                    <input type="text" placeholder="Location" value={currentLocation} onChange={(e) => setCurrentLocation(e.target.value)} />
                   <div className="btn-loc">
                     <button onClick={getLocation}>Get</button>
                   </div>
