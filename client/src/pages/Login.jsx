@@ -4,7 +4,7 @@ import { Header } from "./Header";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react"
 import { Footer } from "./Footer";
-import { Staff } from "./Staff";
+//import { Staff } from "./Staff";
 
 export const Login = () => {
 
@@ -40,6 +40,7 @@ export const Login = () => {
     <>
       <Header />
       <main>
+
         <section className="section-login">
           <div className="container grid grid-center">
             <h2 className="login-heading">Passenger Reconciliation System</h2>
