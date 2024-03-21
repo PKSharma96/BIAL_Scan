@@ -116,3 +116,17 @@
     color: #ffffff;
     border-radius: 0.5rem;
   }
+
+  /* Barcode */
+  .barcode-scanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .video {
+    width: 100%;
+    max-width: 480px;
+  }
+  

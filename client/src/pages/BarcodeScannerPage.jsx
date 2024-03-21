@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarcodeScanner } from './BarcodeScanner';
+import BarcodeScanner from './BarcodeScanner'; // Update import statement
 
 export const BarcodeScannerPage = () => {
   const [scannedCode, setScannedCode] = useState('');
@@ -13,7 +13,7 @@ export const BarcodeScannerPage = () => {
     <div>
       <h1>Barcode Scanner Page</h1>
       <BarcodeScanner onScan={handleScan} />
-      {scannedCode && <p>Scanned Code: {scannedCode}</p>}
+      {scannedCode && <p>Scanned Code: {scannedCode} </p>}
     </div>
   );
 };
