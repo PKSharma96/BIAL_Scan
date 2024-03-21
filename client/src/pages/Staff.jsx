@@ -107,7 +107,7 @@ export const Staff = () => {
                 </div>
 
                 <button type="submit" className="btn btn-primary">
-                  Submit
+                  Save
                 </button>
               </form>
             </div>

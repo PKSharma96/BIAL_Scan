@@ -1,15 +1,22 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Quagga from "quagga";
+import { useNavigate } from "react-router-dom";
 
 export const BarcodeScanner = ({ onScan }) => {
   const videoRef = useRef();
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const [detectedBarcode, setDetectedBarcode] = useState(null); // State to store detected barcode
+  const [detectedBarcode, setDetectedBarcode] = useState(null);
+  const navigate = useNavigate();
+
+  const handleLogin = (event) => {
+    event.preventDefault(); 
+    navigate("/passenger");
+  };
 
   useEffect(() => {
     const requestCameraPermission = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true});
         setPermissionGranted(true);
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -21,20 +28,17 @@ export const BarcodeScanner = ({ onScan }) => {
 
     requestCameraPermission();
 
-    // Copy ref value to a variable for cleanup
-    let currentVideoRef = videoRef.current;
-
     return () => {
-      if (currentVideoRef && currentVideoRef.srcObject) {
-        currentVideoRef.srcObject.getTracks().forEach(track => track.stop());
+      if (videoRef.current && videoRef.current.srcObject) {
+        videoRef.current.srcObject.getTracks().forEach(track => track.stop());
       }
     };
   }, []);
 
-  const handleScan = useCallback((result) => {
-    if (result && result.codeResult) {
-      setDetectedBarcode(result.codeResult.code); // Store detected barcode in state
-      onScan(result.codeResult.code);
+  const handleScan = useCallback((data) => {
+    if (data.codeResult) {
+      setDetectedBarcode(data.codeResult.code);
+      onScan(data.codeResult.code);
     }
   }, [onScan]);
 
@@ -49,11 +53,11 @@ export const BarcodeScanner = ({ onScan }) => {
             width: 480,
             height: 320,
             facingMode: "environment" // or "user" for front camera
-          },
+          }
         },
         decoder: {
           readers: ["ean_reader"]
-        },
+        }
       }, (err) => {
         if (err) {
           console.error(err);
@@ -62,24 +66,31 @@ export const BarcodeScanner = ({ onScan }) => {
         Quagga.start();
         Quagga.onDetected(handleScan);
       });
-  
+
       return () => {
         Quagga.stop();
       };
     }
   }, [permissionGranted, handleScan]);
-  
+
   return (
     <div className="barcode-scanner">
       {permissionGranted ? (
         <>
+        <div className='login-form'>
+          
           <video ref={videoRef} className="video" autoPlay playsInline></video>
+          <button onClick={handleLogin}> Submit </button>
           {detectedBarcode && (
             <div className="barcode-overlay">
-              <p>Detected Barcode: {detectedBarcode}</p>
+              <p>Detected Barcode:</p>
+              <p>{detectedBarcode}</p>
               {/* Add rectangle here to track barcode */}
+            
             </div>
+            
           )}
+        </div>  
         </>
       ) : (
         <p>Please grant camera access to scan barcodes</p>

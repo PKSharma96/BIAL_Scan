@@ -4,6 +4,7 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Staff } from "./pages/Staff";
 import { BarcodeScannerPage } from "./pages/BarcodeScannerPage";
+import { Passenger } from "./pages/Passenger";
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/dashboard" element = { <Dashboard /> } />
         <Route path="/staff" element = { <Staff /> } />
         <Route path="/scanner" element = { <BarcodeScannerPage />} />
+        <Route path="/passenger" element = { <Passenger />} />
       </Routes>
     </BrowserRouter>
     </>
