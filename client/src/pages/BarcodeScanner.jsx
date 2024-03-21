@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import Quagga from 'quagga';
+import Quagga from "quagga";
 
 export const BarcodeScanner = ({ onScan }) => {
   const videoRef = useRef();
   const [permissionGranted, setPermissionGranted] = useState(false);
+  const [detectedBarcode, setDetectedBarcode] = useState(null); // State to store detected barcode
 
   useEffect(() => {
     const requestCameraPermission = async () => {
@@ -32,6 +33,7 @@ export const BarcodeScanner = ({ onScan }) => {
 
   const handleScan = useCallback((result) => {
     if (result && result.codeResult) {
+      setDetectedBarcode(result.codeResult.code); // Store detected barcode in state
       onScan(result.codeResult.code);
     }
   }, [onScan]);
@@ -70,12 +72,18 @@ export const BarcodeScanner = ({ onScan }) => {
   return (
     <div className="barcode-scanner">
       {permissionGranted ? (
-        <video ref={videoRef} className="video" autoPlay playsInline></video>
+        <>
+          <video ref={videoRef} className="video" autoPlay playsInline></video>
+          {detectedBarcode && (
+            <div className="barcode-overlay">
+              <p>Detected Barcode: {detectedBarcode}</p>
+              {/* Add rectangle here to track barcode */}
+            </div>
+          )}
+        </>
       ) : (
         <p>Please grant camera access to scan barcodes</p>
       )}
     </div>
   );
 };
-
-export default BarcodeScanner;

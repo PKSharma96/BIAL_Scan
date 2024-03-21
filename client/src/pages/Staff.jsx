@@ -28,7 +28,7 @@ export const Staff = () => {
               <h2>Passenger Exit Form</h2>
               <form className="exit-form">
                 <div className="form-group">
-                  <label htmlFor="reason">Reason for Exit *</label>
+                  <label required htmlFor="reason">Reason for Exit*</label>
                   <br />
                   <select
                     id="reason"
@@ -38,7 +38,7 @@ export const Staff = () => {
                     onChange={handleReasonChange}
                     required
                   >
-                    <option value="" disabled>Select Reason</option>
+                    <option value="" required>Select Reason</option>
                     <option value="illness">Illness</option>
                     <option value="injury">Injury</option>
                     <option value="emergency">Emergency At Home</option>
@@ -59,7 +59,7 @@ export const Staff = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                  <label htmlFor="cisfName">CISF Officer Name *</label>
+                  <label htmlFor="cisfName">CISF Officer Name*</label>
                   <input
                     type="text"
                     id="cisfName"
@@ -71,7 +71,7 @@ export const Staff = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                  <label htmlFor="cisfId">CISF Officer ID No. *</label>
+                  <label htmlFor="cisfId">CISF Officer ID No.*</label>
                   <input
                     type="text"
                     id="cisfId"
@@ -83,7 +83,7 @@ export const Staff = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                  <label htmlFor="staffName">Airline Staff Name *</label>
+                  <label htmlFor="staffName">Airline Staff Name*</label>
                   <input
                     type="text"
                     id="staffName"
@@ -95,7 +95,7 @@ export const Staff = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                  <label htmlFor="staffId">Airline Staff ID No. *</label>
+                  <label htmlFor="staffId">Airline Staff ID No.*</label>
                   <input
                     type="text"
                     id="staffId"
