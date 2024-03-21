@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://pushpendra123b:9YcvPT0IdSQfp2Fy@cluster0.yr6tfwm.mongodb.net/flight_database');
+mongoose.connect('');
 
 const userSchema = new mongoose.Schema({
     username : String,
