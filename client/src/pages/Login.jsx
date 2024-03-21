@@ -15,7 +15,7 @@ export const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault(); 
     if (username !== "" && password !== "") {
-      navigate("/staff");
+      navigate("/scanner");
     }
   };
   const [currentLocation, setCurrentLocation] = useState('');
