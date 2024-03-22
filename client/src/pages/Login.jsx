@@ -18,23 +18,7 @@ export const Login = () => {
       navigate("/scanner");
     }
   };
-  const [currentLocation, setCurrentLocation] = useState('');
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCurrentLocation(`Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`);
-        },
-        (error) => {
-          console.error('Error getting geolocation:', error);
-          setCurrentLocation('Unable to retrieve location');
-        }
-      );
-    } else {
-      setCurrentLocation('Geolocation is not supported by this browser.');
-    }
-  };
 
   return (
     <>
@@ -56,13 +40,6 @@ export const Login = () => {
                 <div className="input-group">
                   <span><FaLock /></span>
                   <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <div className="input-group">
-                  <span><FaMapMarkerAlt /></span>
-                    <input type="text" placeholder="Location" value={currentLocation} onChange={(e) => setCurrentLocation(e.target.value)} />
-                  <div className="btn-loc">
-                    <button onClick={getLocation}>Get</button>
-                  </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
               </form>
