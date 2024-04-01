@@ -33,6 +33,41 @@ router.get('/signin', async(req, res)=>{
     
 })
 
+router.get('/data' , usermiddleware, async(req, res)=>{
+
+    try {
+        const body = req.body;
+        const cancleData = await Cancle.find({
+            ticketData : {
+                passangerName: body.ticketData.passangerName,
+                flightName : body.ticketData.flightName,
+                flightNo : body.ticketData.flightNo,
+                date :   body.ticketData.date
+            }
+        })
+        if(cancleData.length!=0){
+            await Cancle.deleteOne({
+                ticketData : {
+                    passangerName: body.ticketData.passangerName,
+                    flightName : body.ticketData.flightName,
+                    flightNo : body.ticketData.flightNo,
+                    date :   body.ticketData.date
+                }
+            })
+            res.json(cancleData);
+        }else{
+            res.json({
+                message : "no data found"
+            })
+        }
+        
+    } catch (error) {
+        console.error(error)
+    }
+    
+    
+})
+
 router.post('/cancle', usermiddleware, async(req, res)=>{
 
     try {
